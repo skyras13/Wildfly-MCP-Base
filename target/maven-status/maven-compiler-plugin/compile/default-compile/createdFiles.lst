@@ -4,6 +4,7 @@ com\example\mcp\Device.class
 com\example\mcp\McpSseTransport.class
 com\example\mcp\NetworkInventory.class
 org\wildfly\mcp\api\ToolArg.class
+com\example\mcp\CorsFilter.class
 org\wildfly\mcp\api\ToolDescription.class
 com\example\mcp\McpApplication.class
 org\wildfly\mcp\api\McpTool.class
