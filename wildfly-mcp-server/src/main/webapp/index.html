@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIOps Control Panel</title>
+    <!-- Add your custom CSS here if desired -->
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #fdfdfd; padding: 20px; }
+        header { background: #333; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .dashboard { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .panel { padding: 20px; background: white; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1, h2 { margin-top: 0; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background: #f0f0f0; }
+        .down { color: red; font-weight: bold; }
+        .up { color: green; font-weight: bold; }
+        .controls { margin-top: 15px; }
+        button { padding: 8px 15px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 4px; }
+        button:hover { background: #0056b3; }
+        pre { background: #eee; padding: 10px; border-radius: 4px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>AIOps Control Panel</h1>
+    <p>Model Context Protocol Server Web UI</p>
+</header>
+
+<div class="dashboard">
+    <div class="panel" id="inventory-panel">
+        <h2>Network Inventory</h2>
+        <p>Use the MCP <code>list_devices</code> tool via JSON-RPC / SSE to populate this table.</p>
+        <div class="controls">
+            <button id="btn-load-inventory">Fetch Inventory</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Device ID</th>
+                    <th>IP Address</th>
+                    <th>Status</th>
+                    <th>Health</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="inventory-tbody">
+                <!-- Example Row -->
+                <tr>
+                    <td>RTR-001</td>
+                    <td>192.168.10.1</td>
+                    <td class="up">UP</td>
+                    <td>100%</td>
+                    <td>
+                        <button onclick="fetchLogs('RTR-001')">Logs</button>
+                        <button onclick="remediate('RTR-001', 'REBOOT')">Reboot</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="panel" id="logs-panel">
+        <h2>Device Logs & Remediation</h2>
+        <p>Results from the <code>get_device_logs</code> or <code>remediate_device</code> tools will appear here.</p>
+        <pre id="output-console">Waiting for action...</pre>
+    </div>
+</div>
+
+<script>
+    // -----------------------------------------------------------------------------------------
+    // Candidate Task:
+    // 1. Establish an SSE connection to `/api/mcp/sse`.
+    // 2. Send JSON-RPC format requests (POST) to `/api/mcp/message` to invoke the MCP Tools.
+    // 3. Update the UI dynamically based on the tool execution responses.
+    // -----------------------------------------------------------------------------------------
+
+    document.getElementById('btn-load-inventory').addEventListener('click', () => {
+        document.getElementById('output-console').innerText = "Simulating load item... (Implement MCP integration here)";
+        // TODO: Call MCP tool 'list_devices'
+    });
+
+    function fetchLogs(deviceId) {
+        document.getElementById('output-console').innerText = `Fetching logs for ${deviceId}... (Implement MCP integration here)`;
+        // TODO: Call MCP tool 'get_device_logs'
+    }
+
+    function remediate(deviceId, action) {
+        document.getElementById('output-console').innerText = `Sending ${action} command to ${deviceId}... (Implement MCP integration here)`;
+        // TODO: Call MCP tool 'remediate_device'
+    }
+</script>
+
+</body>
+</html>
